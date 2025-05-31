@@ -17,9 +17,16 @@ namespace NutritionTracker
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
+            builder.Services.AddSingleton<DatabaseService>();
+            builder.Services.AddSingleton<FoodService>();
+            builder.Services.AddSingleton<MealFoodService>();
+            builder.Services.AddSingleton<MealService>();
+            builder.Services.AddSingleton<MealDayService>();
+
 #if DEBUG
-    		builder.Logging.AddDebug();
+            builder.Logging.AddDebug();
 #endif
+            Task.Run(() => DatabaseService.InitAsync());
 
             return builder.Build();
         }

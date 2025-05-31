@@ -23,8 +23,8 @@
         <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Gray950}, Dark={StaticResource Gray200}}" />
     </Style>
 
-    <Style TargetType="Button">
-        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource PrimaryDarkText}}" />
+    <Style TargetType="Button" x:Key="Button">
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource LabelText}, Dark={StaticResource LabelTextDark}}" />
         <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}" />
         <Setter Property="FontFamily" Value="OpenSansRegular"/>
         <Setter Property="FontSize" Value="14"/>
@@ -110,7 +110,7 @@
         </Setter>
     </Style>
 
-    <Style TargetType="Entry">
+    <Style TargetType="Entry" x:Key="Entry">
         <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
         <Setter Property="BackgroundColor" Value="Transparent" />
         <Setter Property="FontFamily" Value="OpenSansRegular"/>
@@ -161,7 +161,29 @@
         </Setter>
     </Style>
 
-    <Style TargetType="Label">
+    <Style TargetType="Label" x:Key="BaseLabel">
+        <Setter Property="FontFamily" Value="OpenSansRegular" />
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource LabelText}, Dark={StaticResource LabelTextDark}}" />
+    </Style>
+
+    <Style x:Key="MicroLabel" BasedOn="{StaticResource BaseLabel}" TargetType="Label">
+        <Setter Property="FontSize" Value="10"/>
+    </Style>
+
+    <Style x:Key="SmallLabel" BasedOn="{StaticResource BaseLabel}" TargetType="Label">
+        <Setter Property="FontSize" Value="12"/>
+    </Style>
+
+    <Style x:Key="MediumLabel" BasedOn="{StaticResource BaseLabel}" TargetType="Label">
+        <Setter Property="FontSize" Value="16"/>
+    </Style>
+
+    <Style x:Key="LargeLabel" BasedOn="{StaticResource BaseLabel}" TargetType="Label">
+        <Setter Property="FontSize" Value="20"/>
+    </Style>
+
+
+    <Style TargetType="Label" x:Key="BaseLabelDefault">
         <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
         <Setter Property="BackgroundColor" Value="Transparent" />
         <Setter Property="FontFamily" Value="OpenSansRegular" />
@@ -196,6 +218,7 @@
         <Setter Property="FontSize" Value="24" />
         <Setter Property="HorizontalOptions" Value="Center" />
         <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="FontAttributes" Value="Bold"/>
     </Style>
 
     <Style TargetType="ListView">
@@ -263,7 +286,7 @@
         </Setter>
     </Style>
 
-    <Style TargetType="RefreshView">
+    <Style TargetType="RefreshView" x:Key="RefreshView">
         <Setter Property="RefreshColor" Value="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray200}}" />
     </Style>
 
@@ -343,6 +366,21 @@
         <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}" />
     </Style>
 
+    <Style x:Key="SwipeItemEditStyle" TargetType="SwipeItem">
+        <Setter Property="Text" Value="Edit" />
+        <Setter Property="BackgroundColor">
+            <AppThemeBinding Light="{StaticResource EditSwipeLight}" Dark="{StaticResource EditSwipeDark}" />
+        </Setter>
+    </Style>
+
+    <Style x:Key="SwipeItemDeleteStyle" TargetType="SwipeItem">
+        <Setter Property="Text" Value="Delete" />
+        <Setter Property="BackgroundColor">
+            <AppThemeBinding Light="{StaticResource DeleteSwipeLight}" Dark="{StaticResource DeleteSwipeDark}" />
+        </Setter>
+    </Style>
+
+
     <Style TargetType="Switch">
         <Setter Property="OnColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}" />
         <Setter Property="ThumbColor" Value="{StaticResource White}" />
@@ -392,7 +430,7 @@
             </VisualStateGroupList>
         </Setter>
     </Style>
-  
+
     <!--
     <Style TargetType="TitleBar">
         <Setter Property="MinimumHeightRequest" Value="32"/>
