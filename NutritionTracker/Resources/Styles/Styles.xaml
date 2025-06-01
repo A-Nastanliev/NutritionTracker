@@ -366,20 +366,6 @@
         <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}" />
     </Style>
 
-    <Style x:Key="SwipeItemEditStyle" TargetType="SwipeItem">
-        <Setter Property="Text" Value="Edit" />
-        <Setter Property="BackgroundColor">
-            <AppThemeBinding Light="{StaticResource EditSwipeLight}" Dark="{StaticResource EditSwipeDark}" />
-        </Setter>
-    </Style>
-
-    <Style x:Key="SwipeItemDeleteStyle" TargetType="SwipeItem">
-        <Setter Property="Text" Value="Delete" />
-        <Setter Property="BackgroundColor">
-            <AppThemeBinding Light="{StaticResource DeleteSwipeLight}" Dark="{StaticResource DeleteSwipeDark}" />
-        </Setter>
-    </Style>
-
 
     <Style TargetType="Switch">
         <Setter Property="OnColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}" />
