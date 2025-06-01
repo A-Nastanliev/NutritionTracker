@@ -6,6 +6,7 @@
         {
             InitializeComponent();
             Routing.RegisterRoute(nameof(MealDetailPage), typeof(MealDetailPage));
+            Routing.RegisterRoute(nameof(MealDayPage), typeof(MealDayPage));
         }
     }
 }

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NutritionTracker.View.MealDayPage"
+             xmlns:local="clr-namespace:NutritionTracker.ViewModels"
+             Title="{Binding Title}"
+             x:Name="MealDayPageRoot"
+             BackgroundColor="{AppThemeBinding Light={StaticResource LightBackground}, Dark={StaticResource DarkBackground}}">
+    
+    <Grid RowDefinitions="Auto,*,Auto" Padding="20" RowSpacing="20">
+
+        <Border Grid.Row="0"
+            StrokeThickness="1"
+            StrokeShape="RoundRectangle 10"
+            Padding="15"
+            BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource OffBlack}}"
+            Stroke="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray600}}">
+            <VerticalStackLayout Spacing="8" HorizontalOptions="Center">
+                <Label Text="Summary"
+                    Style="{StaticResource SubHeadline}" 
+                    HorizontalOptions="Center" />
+
+                <Label 
+                    Text="{Binding TotalCalories}"
+                    Style="{StaticResource MediumLabel}"
+                    HorizontalOptions="Center"
+                    TextColor="{AppThemeBinding Light={StaticResource LabelText}, Dark={StaticResource LabelTextDark}}" />
+
+                <HorizontalStackLayout Spacing="20" HorizontalOptions="Center">
+                    <Label Text="{Binding TotalProteins}"
+                    Style="{StaticResource SmallLabel}"
+                    TextColor="{AppThemeBinding Light={StaticResource SecondaryLabelText}, Dark={StaticResource SecondaryLabelTextDark}}" />
+                    <Label Text="{Binding TotalCarbs}"
+                    Style="{StaticResource SmallLabel}"
+                    TextColor="{AppThemeBinding Light={StaticResource SecondaryLabelText}, Dark={StaticResource SecondaryLabelTextDark}}" />
+                    <Label Text="{Binding TotalFats}"
+                    Style="{StaticResource SmallLabel}"
+                    TextColor="{AppThemeBinding Light={StaticResource SecondaryLabelText}, Dark={StaticResource SecondaryLabelTextDark}}" />
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+        </Border>
+
+        <CollectionView Grid.Row="1"
+            x:Name="MealCollectionView"
+            ItemsSource="{Binding Meals}"
+            SelectionMode="None">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <SwipeView>
+                        <SwipeView.RightItems>
+                            <SwipeItems Mode="Execute">
+                                <SwipeItem
+                                    BackgroundColor="Transparent"
+                                    Command="{Binding BindingContext.DeleteMealCommand, Source={x:Reference MealDayPageRoot}}"
+                                    CommandParameter="{Binding .}" />
+                            </SwipeItems>
+                        </SwipeView.RightItems>
+
+                        <Border 
+                            x:Name="MealCard"
+                            StrokeThickness="1"
+                            StrokeShape="RoundRectangle 10"
+                            Margin="0,5"
+                            Padding="10"
+                            BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource OffBlack}}"
+                            Stroke="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray600}}">
+
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer 
+                                     Tapped="OnMealCardTapped"
+                                    CommandParameter="{Binding .}" />
+                            </Border.GestureRecognizers>
+
+                            <VerticalStackLayout>
+                                <Label Text="{Binding Type}"
+                                    FontSize="16"
+                                    FontAttributes="Bold"
+                                    TextColor="{AppThemeBinding Light={StaticResource LabelText}, Dark={StaticResource LabelTextDark}}" />
+                                <Label Text="{Binding MacrosDisplay}"
+                                    FontSize="14"
+                                    TextColor="{AppThemeBinding Light={StaticResource SecondaryLabelText}, Dark={StaticResource SecondaryLabelTextDark}}" />
+                            </VerticalStackLayout>
+                        </Border>
+                    </SwipeView>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+
+        <Button Grid.Row="2"
+            Text="Add Meal"
+            Command="{Binding AddMealCommand}"
+            HorizontalOptions="Fill"
+            Style="{StaticResource Button}"
+            FontAttributes="Bold"/>
+    </Grid>
+</ContentPage>

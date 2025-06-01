@@ -35,4 +35,9 @@
         ContentTemplate="{DataTemplate views:FoodPage}"
         Route="FoodPage"/>
 
+    <ShellContent
+        Title="History"
+        ContentTemplate="{DataTemplate views:HistoryPage}"
+        Route="HistoryPage"/>
+
 </Shell>
