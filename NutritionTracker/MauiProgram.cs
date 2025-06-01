@@ -24,13 +24,17 @@ namespace NutritionTracker
             builder.Services.AddSingleton<MealDayService>();
 
             builder.Services.AddTransient<FoodPopup>();
+            builder.Services.AddTransient<MealDetailPage>();
 
             builder.Services.AddSingleton<FoodPage>();
             builder.Services.AddSingleton<MainPage>();
 
             builder.Services.AddSingleton<FoodViewModel>();
+            builder.Services.AddSingleton<MainPageViewModel>();
 
             builder.Services.AddTransient<FoodPopupViewModel>();
+            builder.Services.AddTransient<MealDetailViewModel>();
+            builder.Services.AddTransient<MealViewModel>();
 
 #if DEBUG
             builder.Logging.AddDebug();

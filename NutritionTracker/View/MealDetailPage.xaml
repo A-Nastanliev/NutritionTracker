@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NutritionTracker.View.MealDetailPage"
+             Title="{Binding Title}"
+             BackgroundColor="{AppThemeBinding Light={StaticResource LightBackground}, Dark={StaticResource DarkBackground}}">
+    
+    <Grid RowDefinitions="Auto, *" Padding="20" RowSpacing="10">
+
+        <VerticalStackLayout Grid.Row="0" Spacing="10">
+            <Label Text="{Binding Meal.Type}" 
+                   Style="{StaticResource SubHeadline}" />
+
+            <Label Text="{Binding MealCalories}" 
+                   Style="{StaticResource MediumLabel}" 
+                   HorizontalOptions="Center" />
+
+            <Label Text="{Binding MealMacros}" 
+                   Style="{StaticResource SmallLabel}" 
+                   HorizontalOptions="Center" />
+
+            <Picker Title="Select Food"
+                    ItemsSource="{Binding FilteredFoods}"
+                    ItemDisplayBinding="{Binding Name}"
+                    SelectedItem="{Binding SelectedFood}"
+                    TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+
+            <Entry Placeholder="Weight in grams"
+                   Keyboard="Numeric"
+                   Text="{Binding FoodWeightInGrams}"
+                   Style="{StaticResource Entry}" />
+
+            <Button Text="Add Food" 
+                    Command="{Binding AddFoodCommand}" 
+                    Style="{StaticResource Button}"
+                    HorizontalOptions="Fill"
+                    FontAttributes="Bold"/>
+        </VerticalStackLayout>
+
+        <CollectionView Grid.Row="1"
+                        ItemsSource="{Binding MealFoods}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <SwipeView>
+                        <SwipeView.RightItems>
+                            <SwipeItems
+                                Mode="Execute">
+                                <SwipeItem
+                                    BackgroundColor="Transparent"
+                                    Command="{Binding RemoveCommand}" />
+                            </SwipeItems>
+                        </SwipeView.RightItems>
+
+                        <Border StrokeThickness="1"
+                                Padding="10"
+                                Margin="5"
+                                BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource OffBlack}}"
+                                Stroke="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray600}}"
+                                StrokeShape="RoundRectangle 10">
+
+                            <Grid ColumnDefinitions="*,Auto" 
+                                  RowDefinitions="Auto,Auto,Auto">
+
+                                <Label Text="{Binding Name}"
+                                       FontSize="16"
+                                       FontAttributes="Bold"
+                                       Grid.Row="0"
+                                       Grid.Column="0"
+                                       TextColor="{AppThemeBinding Light={StaticResource LabelText}, Dark={StaticResource LabelTextDark}}" />
+
+                                <Label Text="{Binding WeightText}"
+                                       FontSize="14"
+                                       Grid.Row="0"
+                                       Grid.Column="1"
+                                       HorizontalOptions="End"
+                                       TextColor="{AppThemeBinding Light={StaticResource SecondaryLabelText}, Dark={StaticResource SecondaryLabelTextDark}}" />
+
+                                <Label Text="{Binding CaloriesText}"
+                                       FontSize="13"
+                                       Grid.Row="1"
+                                       Grid.Column="0"
+                                       Grid.ColumnSpan="2"
+                                       TextColor="{AppThemeBinding Light={StaticResource LabelText}, Dark={StaticResource LabelTextDark}}" />
+
+                                <Grid Grid.Row="2" 
+                                      Grid.ColumnSpan="2" 
+                                      ColumnDefinitions="*,Auto">
+
+                                    <Label Text="{Binding MacrosText}"
+                                           FontSize="12"
+                                           VerticalOptions="Center"
+                                           TextColor="{AppThemeBinding Light={StaticResource SecondaryLabelText}, Dark={StaticResource SecondaryLabelTextDark}}" />
+                                </Grid>
+                            </Grid>
+                        </Border>
+                    </SwipeView>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </Grid>
+</ContentPage>
+
