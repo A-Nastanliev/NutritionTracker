@@ -75,4 +75,13 @@
 	  <ProjectReference Include="..\DataLayer\DataLayer.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <MauiXaml Update="View\FoodPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\FoodPopup.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	</ItemGroup>
+
 </Project>

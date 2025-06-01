@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NutritionTracker.View.FoodPage"
+             BackgroundColor="{AppThemeBinding Light={StaticResource LightBackground}, Dark={StaticResource DarkBackground}}"
+             Title="{Binding Title}">
+    
+    <Grid RowDefinitions="*,Auto" Padding="10">
+        <RefreshView IsRefreshing="{Binding IsRefreshing}"
+             Command="{Binding GetFoodsCommand}"
+             Grid.Row="0"
+             Style="{StaticResource RefreshView}">
+            <CollectionView x:Name="FoodCollectionView"
+                    ItemsSource="{Binding Foods}">
+
+                <CollectionView.EmptyView>
+                    <VerticalStackLayout 
+                        VerticalOptions="CenterAndExpand"
+                        HorizontalOptions="CenterAndExpand"
+                        Spacing="10">
+                        <Label Text="No foods"
+                        FontSize="18"
+                        TextColor="{AppThemeBinding Light={StaticResource LabelText}, Dark={StaticResource LabelTextDark}}" />
+                    </VerticalStackLayout>
+                </CollectionView.EmptyView>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <SwipeView>
+                            <SwipeView.LeftItems>
+                                <SwipeItems Mode="Execute">
+                                    <SwipeItem 
+                                    Command="{Binding Path=BindingContext.EditFoodCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
+                                    CommandParameter="{Binding .}"
+                                    BackgroundColor="Transparent"/>
+                                </SwipeItems>
+                            </SwipeView.LeftItems>
+
+                            <SwipeView.RightItems>
+                                <SwipeItems Mode="Execute">
+                                    <SwipeItem 
+                                    Command="{Binding Path=BindingContext.DeleteFoodCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
+                                    CommandParameter="{Binding .}" 
+                                    BackgroundColor="Transparent"/>
+                                </SwipeItems>
+                            </SwipeView.RightItems>
+
+                            <Border StrokeShape="RoundRectangle 10" Padding="5" Margin="10">
+                                <VerticalStackLayout Spacing="6">
+                                    <Label Text="{Binding Name}" 
+                                   FontSize="18" 
+                                   FontAttributes="Bold" 
+                                   HorizontalOptions="Center" 
+                                   TextColor="{AppThemeBinding Dark={StaticResource LabelTextDark}, Light={StaticResource LabelText}}"/>
+
+                                    <Label Text="{Binding Calories, StringFormat='{0}kcals'}" 
+                                   FontSize="12" 
+                                   TextColor="Gray"
+                                   HorizontalOptions="Center" />
+
+                                    <Grid ColumnDefinitions="*,*,*" >
+                                        <VerticalStackLayout Grid.Column="0" HorizontalOptions="Center">
+                                            <Label Text="{Binding Proteins, StringFormat='{0}g'}" 
+                                           FontAttributes="Bold"
+                                           TextColor="{AppThemeBinding Dark={StaticResource SecondaryLabelTextDark}, Light={StaticResource SecondaryLabelText}}"
+                                           FontSize="14" />
+                                            <Label Text="Protein" FontSize="12" TextColor="Gray" />
+                                        </VerticalStackLayout>
+
+                                        <VerticalStackLayout Grid.Column="2" HorizontalOptions="Center">
+
+                                            <Label Text="{Binding Fats, StringFormat='{0}g'}" 
+                                           FontAttributes="Bold" 
+                                           FontSize="14"
+                                           TextColor="{AppThemeBinding Dark={StaticResource SecondaryLabelTextDark}, Light={StaticResource SecondaryLabelText}}" />
+                                            <Label Text="Fats" FontSize="12" TextColor="Gray" />
+                                        </VerticalStackLayout>
+
+                                        <VerticalStackLayout Grid.Column="1" HorizontalOptions="Center">
+                                            <Label 
+                                        Text="{Binding Carbohydrates, StringFormat='{0}g'}" 
+                                        FontAttributes="Bold"
+                                        TextColor="{AppThemeBinding Dark={StaticResource SecondaryLabelTextDark}, Light={StaticResource SecondaryLabelText}}"
+                                        FontSize="14" />
+                                            <Label Text="Carbs" FontSize="12" TextColor="Gray" />
+                                        </VerticalStackLayout>
+                                    </Grid>
+                                </VerticalStackLayout>
+                            </Border>
+                        </SwipeView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
+        </RefreshView>
+
+        <Button Text="Add Food"
+        Grid.Row="1"
+        Margin="0,10,0,0"
+        FontAttributes="Bold"
+        CornerRadius="10"
+        Clicked="OnAddFoodClicked"
+        Style="{StaticResource Button}"/>
+    </Grid>
+</ContentPage>

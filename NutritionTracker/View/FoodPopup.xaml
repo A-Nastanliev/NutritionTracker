@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<toolkit:Popup
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    x:Class="NutritionTracker.View.FoodPopup"
+    Color="{AppThemeBinding Dark={StaticResource Gray950}, Light={StaticResource LightBackground}}">
+
+    <VerticalStackLayout Padding="20" Spacing="10">
+
+        <Label 
+            Text="{Binding Header}" 
+            FontSize="20" 
+            HorizontalOptions="Center" 
+            Style="{StaticResource BaseLabelDefault}" />
+
+        <Entry 
+               Text="{Binding Food.Name, Mode=TwoWay}" 
+               Placeholder="Name"
+               TextColor="{AppThemeBinding Dark={StaticResource LabelTextDark}, Light={StaticResource LabelText}}"
+               PlaceholderColor="{AppThemeBinding Dark=#BBBBBB, Light=#888888}" />
+
+        <Entry Text="{Binding Food.Calories, Mode=TwoWay}" 
+               Placeholder="Calories"
+               Keyboard="Numeric"
+               TextColor="{AppThemeBinding Dark={StaticResource LabelTextDark}, Light={StaticResource LabelText}}"
+               PlaceholderColor="{AppThemeBinding Dark=#BBBBBB, Light=#888888}"/>
+
+        <Entry Text="{Binding Food.Proteins, Mode=TwoWay}" 
+               Placeholder="Proteins (g)"
+               Keyboard="Numeric"
+               TextColor="{AppThemeBinding Dark={StaticResource LabelTextDark}, Light={StaticResource LabelText}}"
+               PlaceholderColor="{AppThemeBinding Dark=#BBBBBB, Light=#888888}" />
+
+        <Entry Text="{Binding Food.Carbohydrates, Mode=TwoWay}" 
+               Placeholder="Carbohydrates (g)"
+               Keyboard="Numeric"
+               TextColor="{AppThemeBinding Dark={StaticResource LabelTextDark}, Light={StaticResource LabelText}}"
+               PlaceholderColor="{AppThemeBinding Dark=#BBBBBB, Light=#888888}" />
+
+        <Entry Text="{Binding Food.Fats, Mode=TwoWay}" 
+               Placeholder="Fats (g)"
+               Keyboard="Numeric"
+               TextColor="{AppThemeBinding Dark={StaticResource LabelTextDark}, Light={StaticResource LabelText}}"
+               PlaceholderColor="{AppThemeBinding Dark=#BBBBBB, Light=#888888}" />
+
+        <Button 
+            Text="{Binding ActionButtonText}"
+            TextColor="{AppThemeBinding Dark={StaticResource LabelTextDark}, Light={StaticResource LabelText}}"
+            Command="{Binding SaveCommand}" />
+
+    </VerticalStackLayout>
+</toolkit:Popup>
