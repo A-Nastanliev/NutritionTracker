@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SQLite;
+﻿using SQLite;
 
 namespace DataLayer
 {
@@ -31,7 +25,7 @@ namespace DataLayer
                 );
                 ");
 
-      
+
             await database.ExecuteAsync(@"
                 CREATE TABLE IF NOT EXISTS MealDay (
                 Id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -39,7 +33,7 @@ namespace DataLayer
                 );
                 ");
 
-    
+
             await database.ExecuteAsync(@"
                 CREATE TABLE IF NOT EXISTS Meal (
                 Id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -107,6 +101,15 @@ namespace DataLayer
                 ");
 
             return testDatabase;
+        }
+
+        public static void DeleteTestDb(string testDbName)
+        {
+            string databasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), testDbName);
+            if (File.Exists(databasePath))
+            {
+                File.Delete(databasePath);
+            }
         }
     }
 }
