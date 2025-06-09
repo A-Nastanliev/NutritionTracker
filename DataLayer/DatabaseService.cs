@@ -58,12 +58,12 @@ namespace DataLayer
             return database;
         }
 
-        public static async Task<SQLiteAsyncConnection> CreateTestDb(string testDbName)
+        public static async void CreateTestDb(string testDbName)
         {
             string databasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), testDbName);
-            SQLiteAsyncConnection testDatabase = new SQLiteAsyncConnection(databasePath);
+            database = new SQLiteAsyncConnection(databasePath);
 
-            await testDatabase.ExecuteAsync(@"
+			await database.ExecuteAsync(@"
                 CREATE TABLE IF NOT EXISTS Food (
                 Id INTEGER PRIMARY KEY AUTOINCREMENT,
                 Name TEXT NOT NULL CHECK(length(Name) <= 30),
@@ -75,7 +75,7 @@ namespace DataLayer
                 ");
 
 
-            await testDatabase.ExecuteAsync(@"
+			await database.ExecuteAsync(@"
                 CREATE TABLE IF NOT EXISTS MealDay (
                 Id INTEGER PRIMARY KEY AUTOINCREMENT,
                 Date TEXT NOT NULL
@@ -83,7 +83,7 @@ namespace DataLayer
                 ");
 
 
-            await testDatabase.ExecuteAsync(@"
+			await database.ExecuteAsync(@"
                 CREATE TABLE IF NOT EXISTS Meal (
                 Id INTEGER PRIMARY KEY AUTOINCREMENT,
                 Type INTEGER NOT NULL CHECK(Type >= 0 AND Type <= 3),
@@ -91,7 +91,7 @@ namespace DataLayer
                 );
                 ");
 
-            await testDatabase.ExecuteAsync(@"
+			await database.ExecuteAsync(@"
                 CREATE TABLE IF NOT EXISTS MealFood (
                 Id INTEGER PRIMARY KEY AUTOINCREMENT,
                 Weight REAL NOT NULL CHECK(Weight > 0),
@@ -99,9 +99,7 @@ namespace DataLayer
                 MealId INTEGER NOT NULL
                 );
                 ");
-
-            return testDatabase;
-        }
+		}
 
         public static void DeleteTestDb(string testDbName)
         {
