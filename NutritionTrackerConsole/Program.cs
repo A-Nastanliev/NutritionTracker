@@ -1,5 +1,6 @@
 ﻿using BusinessLayer;
 using DataLayer;
+using System.Data;
 
 namespace NutritionTrackerConsole
 {
@@ -24,8 +25,10 @@ namespace NutritionTrackerConsole
 						ReadAll(input);
 						break;
 					case "update":
+						Update(input);
 						break;
 					case "delete":
+						Delete(input);
 						break;
 					case "help":
 						Help();
@@ -52,6 +55,82 @@ namespace NutritionTrackerConsole
 			Console.WriteLine("help -> lists all models");
 			Console.WriteLine("menu");
 			Console.WriteLine("stop");
+		}
+		public static async void Update(List<string> input)
+		{
+			List<string> inputM = new List<string>();
+			switch (input[1])
+			{
+				case "food":
+					FoodService foodService = new FoodService();
+					Food food = await foodService.ReadAsync(int.Parse(input[2]));
+					Console.WriteLine($"Id: {food.Id}, Name: {food.Name}, Calories: {food.Calories}," +
+						$" Protein:{food.Proteins}, Carbohydrates: {food.Carbohydrates}, Fats: {food.Fats}");
+					Console.WriteLine(" [(string) name] (all double) [calories] [proteins] [carbohydrates] [fats]");
+					inputM = Console.ReadLine().Split().ToList();
+					Food newFood = new Food
+					{
+						Id = food.Id,
+						Name = inputM[0],
+						Calories = Convert.ToDouble(inputM[1]),
+						Proteins = Convert.ToDouble(inputM[2]),
+						Carbohydrates = Convert.ToDouble(inputM[3]),
+						Fats = Convert.ToDouble(inputM[4])
+					};
+					await foodService.UpdateAsync(newFood);
+					break;
+				case "meal_food":
+					MealFoodService mealFoodService = new MealFoodService();
+					MealFood mealFood = await mealFoodService.ReadAsync(int.Parse(input[2]));
+					PrintMealFood(mealFood);
+					Console.WriteLine(" [(double) weight] [(int) food_id] [(int) meal_id]");
+					inputM = Console.ReadLine().Split().ToList();
+					MealFood newMealFood = new MealFood
+					{
+						Id = mealFood.Id,
+						Weight = Convert.ToDouble(inputM[0]),
+						FoodId = Convert.ToInt32(inputM[1]),
+						MealId = Convert.ToInt32(inputM[2]),
+					};
+					await mealFoodService.UpdateAsync(newMealFood);
+					break;
+				case "meal":
+					MealService mealService = new MealService();
+					Meal meal = await mealService.ReadAsync(int.Parse(input[2]));
+					PrintMeal(meal);
+					Console.WriteLine(" [(Enum) meal_type] [(int) meal_day_id]");
+					Console.WriteLine("to list meal types -> list_meal_types");
+					inputM = Console.ReadLine().Split().ToList();
+					if (inputM[0] == "list_meal_types")
+					{
+						Console.WriteLine("Meal types are : breakfast, lunch, dinner, snack");
+						inputM = Console.ReadLine().Split().ToList();
+					}
+					byte mealTypeIndex = 0;
+					switch (inputM[0])
+					{
+						case "breakfast":
+							mealTypeIndex = 0;
+							break;
+						case "lunch":
+							mealTypeIndex = 1;
+							break;
+						case "dinner":
+							mealTypeIndex = 2;
+							break;
+						case "snack":
+							mealTypeIndex = 3;
+							break;
+					}
+					Meal newMeal = new Meal
+					{
+						Id = meal.Id,
+						MealDayId = Convert.ToInt32(inputM[1]),
+						Type = (MealType)mealTypeIndex
+					};
+					await mealService.UpdateAsync(newMeal);
+					break;
+			}
 		}
 		static async void Read(List<string> input)
 		{
@@ -149,33 +228,31 @@ namespace NutritionTrackerConsole
 					break;
 			}
 		}
-		static async void Update(List<string> input)
-		{
-			switch (input[1])
-			{
-				case "food":
-
-					break;
-				case "meal_food":
-					break;
-				case "meal":
-					break;
-				case "meal_day":
-					break;
-			}
-		}
 		static async void Delete(List<string> input)
 		{
-			switch (input[1])
+			Console.WriteLine("Are you sure about that? [Y/N]");
+			char status = char.Parse(Console.ReadLine());
+			if (status == 'Y' || status == 'y')
 			{
-				case "food":
-					break;
-				case "meal_food":
-					break;
-				case "meal":
-					break;
-				case "meal_day":
-					break;
+				switch (input[1])
+				{
+					case "food":
+						FoodService foodService = new FoodService();
+						await foodService.DeleteAsync(int.Parse(input[2]));
+						break;
+					case "meal_food":
+						MealFoodService mealFoodService = new MealFoodService();
+						await mealFoodService.DeleteAsync(int.Parse(input[2]));
+						break;
+					case "meal":
+						MealService mealService = new MealService();
+						await mealService.DeleteAsync(int.Parse(input[2]));
+						break;
+					case "meal_day":
+						MealDayService mealDayService = new MealDayService();
+						await mealDayService.DeleteAsync(int.Parse(input[2]));
+						break;
+				}
 			}
 		}
 
