@@ -129,7 +129,7 @@ namespace NutritionTracker.ViewModels
                 return;
 
             bool confirm = await Shell.Current.DisplayAlert(
-                $"Delete {mealVm.Type}", "Are you sure you?", "Yes", "Cancel");
+                "Delete Meal", "Are you sure you want to delete this meal?", "Yes", "Cancel");
 
             if (!confirm)
                 return;

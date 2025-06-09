@@ -28,10 +28,19 @@ namespace NutritionTracker.ViewModels
             {
                 IsBusy = true;
                 var days = await mealDayService.ReadAllAsync();
-                days = days.Where(d => d.Date.Date != DateTime.Today).Reverse().ToList();
-
+                //days = days.Where(d => d.Date.Date != DateTime.Today).Reverse().ToList();
+                days.Reverse();
                 MainThread.BeginInvokeOnMainThread(() => MealDays.Clear());
-
+                var todayDuplicates = days.Where(d => d.Date.Date == DateTime.Today).ToList();
+                if (todayDuplicates.Count > 1) 
+                {
+                    for (int i = 1; i < todayDuplicates.Count; i++) 
+                    {
+                        await mealDayService.DeleteAsync(todayDuplicates[i].Id);
+                        days.Remove(todayDuplicates[i]);
+                    }
+                }
+                
                 foreach (var day in days)
                 {
                     var vm = new MealDayViewModel(day);
@@ -54,7 +63,7 @@ namespace NutritionTracker.ViewModels
 
         private async Task DeleteMealDayAsync(MealDay mealDay)
         {
-            bool confirm = await Shell.Current.DisplayAlert($"Delete {mealDay.Date:MMMM dd}", $"Are you sure you?", "Yes", "No");
+            bool confirm = await Shell.Current.DisplayAlert("Delete", $"Are you sure you want to delete {mealDay.Date:MMMM dd}?", "Yes", "No");
             if (confirm)
             {
                 await mealDayService.DeleteAsync(mealDay.Id);

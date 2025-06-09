@@ -45,7 +45,7 @@ namespace NutritionTracker.ViewModels
         [RelayCommand]
         private async Task DeleteFoodAsync(Food food)
         {
-            bool confirm = await Shell.Current.DisplayAlert($"Delete {food.Name}", $"Are you sure you?", "Yes", "No");
+            bool confirm = await Shell.Current.DisplayAlert("Delete", $"Are you sure you want to delete {food.Name}?", "Yes", "No");
             if (confirm)
             {
                 await foodService.DeleteAsync(food.Id);
@@ -75,6 +75,5 @@ namespace NutritionTracker.ViewModels
                 AppSettings.SortFoods(Foods);
             }
         }
-
     }
 }

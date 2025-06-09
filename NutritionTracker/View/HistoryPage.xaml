@@ -37,13 +37,13 @@
                                     </SwipeItems>
                                 </SwipeView.RightItems>
 
-                                <Border
-                                    Stroke="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray700}}"
-                                    StrokeThickness="1"
-                                    StrokeShape="RoundRectangle 12"
-                                    BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource OffBlack}}"
-                                    Margin="12,6"
-                                    Padding="14">
+                                <Border x:Name="MealCard"
+                                        StrokeThickness="1"
+                                        StrokeShape="RoundRectangle 10"
+                                        Margin="0,8"
+                                        Padding="10"
+                                        BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource OffBlack}}"
+                                        Stroke="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray600}}">
 
                                     <Border.GestureRecognizers>
                                         <TapGestureRecognizer 
@@ -54,28 +54,28 @@
                                     <VerticalStackLayout Spacing="8">
                                         <Grid ColumnDefinitions="*,Auto">
                                             <Label Text="{Binding DateText}"
-                                               FontSize="18"
-                                               FontAttributes="Bold"
-                                               TextColor="{AppThemeBinding Light={StaticResource LabelText}, Dark={StaticResource LabelTextDark}}" />
+                                                 FontSize="18"
+                                                 FontAttributes="Bold"
+                                                 TextColor="{AppThemeBinding Light={StaticResource LabelText}, Dark={StaticResource LabelTextDark}}" />
 
                                             <Label Text="{Binding CaloriesText}"
-                                               FontSize="16"
-                                               FontAttributes="Bold"
-                                               Grid.Column="1"
-                                               HorizontalOptions="End"
-                                               TextColor="{AppThemeBinding Light={StaticResource LabelText}, Dark={StaticResource LabelTextDark}}" />
+                                                 FontSize="16"
+                                                 FontAttributes="Bold"
+                                                 Grid.Column="1"
+                                                 HorizontalOptions="End"
+                                                 TextColor="{AppThemeBinding Light={StaticResource LabelText}, Dark={StaticResource LabelTextDark}}" />
                                         </Grid>
 
                                         <Grid ColumnDefinitions="*,Auto">
                                             <Label Text="{Binding MacrosText}"
-                                               FontSize="13"
-                                               TextColor="{AppThemeBinding Light={StaticResource SecondaryLabelText}, Dark={StaticResource SecondaryLabelTextDark}}" />
+                                                 FontSize="13"
+                                                 TextColor="{AppThemeBinding Light={StaticResource SecondaryLabelText}, Dark={StaticResource SecondaryLabelTextDark}}" />
 
                                             <Label Text="{Binding MealCountText}"
-                                               FontSize="13"
-                                               Grid.Column="1"
-                                               HorizontalOptions="End"
-                                               TextColor="{AppThemeBinding Light={StaticResource SecondaryLabelText}, Dark={StaticResource SecondaryLabelTextDark}}" />
+                                                 FontSize="13"
+                                                 Grid.Column="1"
+                                                 HorizontalOptions="End"
+                                                 TextColor="{AppThemeBinding Light={StaticResource SecondaryLabelText}, Dark={StaticResource SecondaryLabelTextDark}}" />
                                         </Grid>
                                     </VerticalStackLayout>
                                 </Border>

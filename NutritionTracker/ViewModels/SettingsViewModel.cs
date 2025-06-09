@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using NutritionTracker;
+using System.Collections.ObjectModel;
 
 namespace NutritionTracker.ViewModels
 {
@@ -18,6 +19,7 @@ namespace NutritionTracker.ViewModels
         private ObservableCollection<string> accentColors = new();
         [ObservableProperty]
         private string selectedAccentColor;
+
 
         private static readonly IDictionary<string, ResourceDictionary> accentColorsMap = new Dictionary<string, ResourceDictionary>()
         {
@@ -56,7 +58,7 @@ namespace NutritionTracker.ViewModels
         [RelayCommand]
         private async Task ClearDatabaseAsync()
         {
-            bool confirm = await Shell.Current.DisplayAlert("Delete database", "Are you sure? This cannot be undone."
+            bool confirm = await Shell.Current.DisplayAlert("Delete database", "Are you sure? This will permanently delete all your data and cannot be undone."
                 , "Yes", "No");
             if (confirm)
             {
@@ -70,7 +72,7 @@ namespace NutritionTracker.ViewModels
         [RelayCommand]
         private async Task DeleteMealHistoryAsync()
         {
-            bool confirm = await Shell.Current.DisplayAlert("Delete meal history", "Are you sure? This cannot be undone."
+            bool confirm = await Shell.Current.DisplayAlert("Delete meal history", "Are you sure? This will permanently delete your history and cannot be undone."
                 , "Yes", "No");
             if (confirm)
             {

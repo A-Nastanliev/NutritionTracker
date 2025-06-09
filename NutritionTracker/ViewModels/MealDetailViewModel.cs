@@ -76,8 +76,8 @@ namespace NutritionTracker.ViewModels
         private async Task ConfirmRemoveMealFoodAsync(MealFoodViewModel vm)
         {
             bool confirm = await Shell.Current.DisplayAlert(
-                $"Remove {vm.Name}",
-                $"Are you sure you?",
+                "Remove Food",
+                $"Are you sure you want to remove {vm.Name}?",
                 "Yes",
                 "Cancel");
 
