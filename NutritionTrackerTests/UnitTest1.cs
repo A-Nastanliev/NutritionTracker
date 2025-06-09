@@ -178,7 +178,100 @@ namespace NutritionTrackerTests
 			MealFood result = await mealFoodService.ReadAsync(mealFood.Id);
 			Assert.That(result, Is.Null);
 		}
-
+		[Test]
+		public async Task MealFood_Read_Succ()
+		{
+			MealFood newMealFood = await mealFoodService.ReadAsync(testMealFoodId);
+			Assert.That(newMealFood, Is.Not.Null);
+		}
+		[Test]
+		public async Task MealFood_Read_UnSucc()
+		{
+			MealFood newMealFood = await mealFoodService.ReadAsync(int.MaxValue);
+			Assert.That(newMealFood, Is.Null);
+		}
+		[Test]
+		public async Task MealFood_Update_Succ()
+		{
+			MealFood newMealFood = await mealFoodService.ReadAsync(testMealFoodId);
+			newMealFood.Weight += 50;
+			await mealFoodService.UpdateAsync(newFood);
+			MealFood result = await mealFoodService.ReadAsync(testMealFoodId);
+			Assert.That(result, Is.Not.Null);
+			Assert.That(newMealFood.Weight, Is.EqualTo(result.Weight));
+		}
+		[Test]
+		public async Task MealFood_Update_UnSucc()
+		{
+			MealFood newMealFood = await mealFoodService.ReadAsync(testMealFoodId);
+			newMealFood.Weight = -100;
+			await mealFoodService.UpdateAsync(newFood);
+			MealFood result = await mealFoodService.ReadAsync(testMealFoodId);
+			Assert.That(result, Is.Not.Null);
+			Assert.That(newMealFood.Weight, Is.Not.EqualTo(result.Weight));
+		}
+		[Test]
+		public async Task MealFood_Remove_Succ()
+		{
+			MealFood mealFood1 = new MealFood
+			{
+				MealId = testMealId,
+				FoodId = food2.Id,
+				Weight = 100
+			};
+			await foodService.CreateAsync(mealFood1);
+			await foodService.DeleteAsync(mealFood1.Id);
+			MealFood result = await mealFoodService.ReadAsync(mealFood.Id);
+			Assert.That(result, Is.Null);
+		}
+		[Test]
+		
+		public async Task Meal_Create_Succ()
+		{
+			Meal meal1 = new Meal
+			{
+				Type = MealType.Breakfast,
+				MealDayId = 1
+			};
+			await mealService.CreateAsync(meal1);
+			Meal result = await MealService.ReadAsync(meal1.Id);
+			Assert.That(result, Is.Not.Null);
+		}
+		[Test]
+		public async Task Meal_Read_Succ()
+		{
+			Meal newMeal = await mealService.ReadAsync(testMealId);
+			Assert.That(newMeal, Is.Not.Null);
+		}
+		[Test]
+		public async Task Meal_Read_UnSucc()
+		{
+			Meal newMeal = await mealService.ReadAsync(int.MaxValue());
+			Assert.That(newMeal, Is.Null);
+		}
+		[Test]
+		public async Task Meal_Update_Succ()
+		{
+			Meal newMeal = await mealService.ReadAsync(testMealId);
+			MealType type = newMeal.Type;
+			newMeal.Type = MealType.Lunch;
+			await mealService.UpdateAsync(newMeal);
+			Meal result = await mealService.ReadAsync(testMealId);
+			Assert.That(result, Is.Not.Null);
+			Assert.That(newMeal.Type, Is.EqualTo(result.Type));
+		}
+		[Test]
+		public async Task Meal_Remove_Succ()
+		{
+			Meal meal = new Meal
+			{
+				Type = MealType.Dinner
+			};
+			await mealService.CreateAsync(meal);
+			await mealService.RemoveAsync(meal);
+			Meal result = await mealService.ReadAsync(meal.Id);
+			Assert.That(result, Is.Null);
+		}
 		[TearDown] 
         public void TearDown() 
         {
