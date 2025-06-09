@@ -34,5 +34,10 @@ namespace BusinessLayer
         {
             await db.DeleteAsync<Food>(id);
         }
+
+        public async Task ClearAsync()
+        {
+            await db.ExecuteAsync("DELETE FROM Food");
+        }
     }
 }

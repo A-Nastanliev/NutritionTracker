@@ -23,4 +23,14 @@ public partial class FoodPage : ContentPage
 
         await this.ShowPopupAsync(popup);
     }
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+
+        if (BindingContext is FoodViewModel vm)
+        {
+            vm.EnsureSorted();
+        }
+    }
 }

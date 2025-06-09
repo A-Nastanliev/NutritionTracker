@@ -20,7 +20,6 @@ namespace NutritionTracker.ViewModels
         [ObservableProperty]
         private string foodWeightInGrams;
 
-
         public string MealCalories => $"{Meal.GetCalories():F0} kcal";
         public string MealMacros => $"Protein: {Meal.GetProteins():F0}g, Carbs: {Meal.GetCarbohydrates():F0}g, Fats: {Meal.GetFats():F0}g";
 
@@ -45,7 +44,8 @@ namespace NutritionTracker.ViewModels
         private async void LoadFoodsAsync()
         {
             var allFoods = await _foodService.ReadAllAsync();
-            FilteredFoods = new ObservableCollection<Food>(allFoods.OrderBy(f => f.Name));
+            FilteredFoods = new ObservableCollection<Food>();
+            AppSettings.SortFoods(allFoods, FilteredFoods);
         }
 
         [RelayCommand]
@@ -76,8 +76,8 @@ namespace NutritionTracker.ViewModels
         private async Task ConfirmRemoveMealFoodAsync(MealFoodViewModel vm)
         {
             bool confirm = await Shell.Current.DisplayAlert(
-                "Remove Food",
-                $"Are you sure you want to remove {vm.Name}?",
+                $"Remove {vm.Name}",
+                $"Are you sure you?",
                 "Yes",
                 "Cancel");
 

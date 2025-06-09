@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NutritionTracker.View.SettingsPage"
+             xmlns:vm="clr-namespace:NutritionTracker.ViewModels"
+             Title="{Binding Title}"
+             BackgroundColor="{AppThemeBinding Light={StaticResource LightBackground}, Dark={StaticResource DarkBackground}}">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="10">
+
+            <VerticalStackLayout Padding="8"> 
+                   <Label 
+                        Text="Accent Color" 
+                        FontSize="20"
+                        FontAttributes="Bold"
+                        TextColor="{AppThemeBinding Light={StaticResource LabelText}, Dark={StaticResource LabelTextDark}}" />
+                
+                  <Picker 
+                      Title="Accent Color"
+                      ItemsSource="{Binding AccentColors}"
+                      SelectedItem="{Binding SelectedAccentColor, Mode=TwoWay}"
+                      TextColor="{AppThemeBinding Light={StaticResource LabelText}, Dark={StaticResource LabelTextDark}}"/>
+                
+            </VerticalStackLayout>
+                
+
+
+            <VerticalStackLayout Padding="10">
+
+                <Label 
+                     Text="Food Sorting" 
+                     FontAttributes="Bold"
+                     TextColor="{AppThemeBinding Light={StaticResource LabelText}, Dark={StaticResource LabelTextDark}}"
+                     FontSize="20" />
+
+                <Picker 
+                     Title="Sort Foods By"
+                     ItemsSource="{Binding FoodSortingOptions}"
+                     SelectedItem="{Binding SelectedSortingOption, Mode=TwoWay}"
+                     TextColor="{AppThemeBinding Light={StaticResource LabelText}, Dark={StaticResource LabelTextDark}}"/>
+                
+            </VerticalStackLayout>
+
+            <Border 
+                Stroke="Red"
+                StrokeThickness="1.5"
+                StrokeShape="RoundRectangle 16"
+                BackgroundColor="{AppThemeBinding Light='#FFEEEE', Dark='#330000'}"
+                Padding="0"
+                Margin="0,10,0,0">  
+
+                <VerticalStackLayout Spacing="16"
+                                     Padding="20">
+                    <Label 
+                        Text="Danger Zone" 
+                        TextColor="Red" 
+                        FontAttributes="Bold" 
+                        FontSize="20" 
+                        HorizontalOptions="Center"/>
+
+                    <Button 
+                        Text="Clean Entire Database"
+                        BackgroundColor="Red"
+                        Padding="10"
+                        Style="{StaticResource DangerButtonStyle}"
+                        Command="{Binding ClearDatabaseCommand}"
+                        CommandParameter="{Binding .}" />
+
+
+                    <Button 
+                        Text="Delete All Meal History"
+                        BackgroundColor="#CC0000"        
+                        Padding="10"
+                        Command="{Binding DeleteMealHistoryCommand}"
+                        CommandParameter="{Binding .}" 
+                        Style="{StaticResource DangerButtonStyle}"/>
+                    
+                </VerticalStackLayout>
+            </Border>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

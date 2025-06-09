@@ -30,10 +30,12 @@ namespace NutritionTracker
             builder.Services.AddSingleton<FoodPage>();
             builder.Services.AddSingleton<MainPage>();
             builder.Services.AddSingleton<HistoryPage>();
+            builder.Services.AddSingleton<SettingsPage>();
 
             builder.Services.AddSingleton<FoodViewModel>();
             builder.Services.AddSingleton<MainPageViewModel>();
             builder.Services.AddSingleton<HistoryPageViewModel>();
+            builder.Services.AddSingleton<SettingsViewModel>();
 
             builder.Services.AddTransient<FoodPopupViewModel>();
             builder.Services.AddTransient<MealFoodViewModel>();

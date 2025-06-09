@@ -54,7 +54,7 @@ namespace NutritionTracker.ViewModels
 
         private async Task DeleteMealDayAsync(MealDay mealDay)
         {
-            bool confirm = await Shell.Current.DisplayAlert("Delete", $"Are you sure you want to delete {mealDay.Date:MMMM dd}?", "Yes", "No");
+            bool confirm = await Shell.Current.DisplayAlert($"Delete {mealDay.Date:MMMM dd}", $"Are you sure you?", "Yes", "No");
             if (confirm)
             {
                 await mealDayService.DeleteAsync(mealDay.Id);

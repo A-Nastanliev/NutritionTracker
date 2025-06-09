@@ -78,7 +78,7 @@ namespace DataLayer
 			await database.ExecuteAsync(@"
                 CREATE TABLE IF NOT EXISTS MealDay (
                 Id INTEGER PRIMARY KEY AUTOINCREMENT,
-                Date TEXT NOT NULL
+                Date TEXT NOT NULL UNIQUE
                 );
                 ");
 

@@ -6,12 +6,12 @@
 
     <!-- Note: For Android please see also Platforms\Android\Resources\values\colors.xml -->
 
-    <Color x:Key="Primary">#e53935</Color>
+    <!--<Color x:Key="Primary">#e53935</Color>
     <Color x:Key="PrimaryDark">#b71c1c</Color>
     <Color x:Key="PrimaryDarkText">#4a0000</Color>
     <Color x:Key="Secondary">#ffcdd2</Color>
     <Color x:Key="SecondaryDarkText">#d32f2f</Color>
-    <Color x:Key="Tertiary">#b71c1c</Color>
+    <Color x:Key="Tertiary">#b71c1c</Color>-->
 
     <Color x:Key="White">White</Color>
     <Color x:Key="Black">Black</Color>
@@ -37,9 +37,6 @@
     <Color x:Key="Gray900">#212121</Color>
     <Color x:Key="Gray950">#141414</Color>
 
-    <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource Primary}"/>
-    <SolidColorBrush x:Key="SecondaryBrush" Color="{StaticResource Secondary}"/>
-    <SolidColorBrush x:Key="TertiaryBrush" Color="{StaticResource Tertiary}"/>
     <SolidColorBrush x:Key="WhiteBrush" Color="{StaticResource White}"/>
     <SolidColorBrush x:Key="BlackBrush" Color="{StaticResource Black}"/>
 

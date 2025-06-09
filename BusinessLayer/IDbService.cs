@@ -7,5 +7,6 @@
         Task<T> ReadAsync(K id);
         Task UpdateAsync(T obj);
         Task DeleteAsync(K id);
+        Task ClearAsync();
     }
 }

@@ -28,10 +28,7 @@ namespace NutritionTracker.ViewModels
                 IsBusy = true;
                 var foods = await foodService.ReadAllAsync();
                 if (Foods.Count != 0) Foods.Clear();
-                foreach (var food in foods.OrderBy(f=>f.Name))
-                {
-                    Foods.Add(food);
-                }
+                AppSettings.SortFoods(foods, Foods);
             }
             catch (Exception ex)
             {
@@ -48,7 +45,7 @@ namespace NutritionTracker.ViewModels
         [RelayCommand]
         private async Task DeleteFoodAsync(Food food)
         {
-            bool confirm = await Shell.Current.DisplayAlert("Delete", $"Are you sure you want to delete {food.Name}?", "Yes", "No");
+            bool confirm = await Shell.Current.DisplayAlert($"Delete {food.Name}", $"Are you sure you?", "Yes", "No");
             if (confirm)
             {
                 await foodService.DeleteAsync(food.Id);
@@ -69,6 +66,14 @@ namespace NutritionTracker.ViewModels
             );
 
             await Shell.Current.ShowPopupAsync(popup);
+        }
+
+        public void EnsureSorted()
+        {
+            if (!AppSettings.IsSorted(Foods))
+            {
+                AppSettings.SortFoods(Foods);
+            }
         }
 
     }

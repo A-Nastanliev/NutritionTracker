@@ -5,6 +5,7 @@
         public App()
         {
             InitializeComponent();
+            SettingsViewModel.SetAccentColor(AppSettings.CurrentColor.ToDisplayName(), true);
         }
 
         protected override Window CreateWindow(IActivationState? activationState)

@@ -47,7 +47,8 @@
         <Button 
             Text="{Binding ActionButtonText}"
             TextColor="{AppThemeBinding Dark={StaticResource LabelTextDark}, Light={StaticResource LabelText}}"
-            Command="{Binding SaveCommand}" />
+            Command="{Binding SaveCommand}"
+             BackgroundColor="{DynamicResource Primary}"/>
 
     </VerticalStackLayout>
 </toolkit:Popup>
