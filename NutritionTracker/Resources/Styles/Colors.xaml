@@ -25,6 +25,9 @@
     <Color x:Key="SecondaryLabelText">#3f3f3f</Color>
     <Color x:Key="SecondaryLabelTextDark">#cfcfcf</Color>
 
+    <Color x:Key="ThirdLableText">#888888</Color>
+    <Color x:Key="ThirdLableTextDark">#BBBBBB</Color>
+
     <Color x:Key="LightBackground">#FAF9F8</Color>
     <Color x:Key="DarkBackground">Black</Color>
 

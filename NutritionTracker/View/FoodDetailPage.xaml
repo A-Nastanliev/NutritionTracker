@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NutritionTracker.View.FoodDetailPage"
+             Title="{Binding Title}"
+             BackgroundColor="{AppThemeBinding Dark={StaticResource Gray950}, Light={StaticResource LightBackground}}">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="14">
+
+
+            <Label Text="Name" Style="{StaticResource BaseLabelDefault}" />
+            <Border Style="{StaticResource InputBorderStyle}">
+                <Entry 
+                    Text="{Binding Food.Name, Mode=TwoWay}" 
+                    Placeholder="e.g. Apple"
+                    BackgroundColor="Transparent"
+                    TextColor="{AppThemeBinding Dark={StaticResource LabelTextDark}, Light={StaticResource LabelText}}"
+                    PlaceholderColor="{AppThemeBinding Dark={StaticResource ThirdLableTextDark}, Light={StaticResource ThirdLableText}}" />
+            </Border>
+
+            <Label Text="Calories" Style="{StaticResource BaseLabelDefault}" />
+            <Border Style="{StaticResource InputBorderStyle}">
+                <Entry 
+                    Text="{Binding Food.Calories, Mode=TwoWay}" 
+                    Keyboard="Numeric"
+                    BackgroundColor="Transparent"
+                    TextColor="{AppThemeBinding Dark={StaticResource LabelTextDark}, Light={StaticResource LabelText}}"
+                    PlaceholderColor="{AppThemeBinding Dark={StaticResource ThirdLableTextDark}, Light={StaticResource ThirdLableText}}" />
+            </Border>
+
+            <Label Text="Proteins (g)" Style="{StaticResource BaseLabelDefault}" />
+            <Border Style="{StaticResource InputBorderStyle}">
+                <Entry 
+                    Text="{Binding Food.Proteins, Mode=TwoWay}" 
+                    Keyboard="Numeric"
+                    BackgroundColor="Transparent"
+                    TextColor="{AppThemeBinding Dark={StaticResource LabelTextDark}, Light={StaticResource LabelText}}"
+                    PlaceholderColor="{AppThemeBinding Dark={StaticResource ThirdLableTextDark}, Light={StaticResource ThirdLableText}}" />
+            </Border>
+
+            <Label Text="Carbohydrates (g)" Style="{StaticResource BaseLabelDefault}" />
+            <Border Style="{StaticResource InputBorderStyle}">
+                <Entry 
+                    Text="{Binding Food.Carbohydrates, Mode=TwoWay}" 
+                    Keyboard="Numeric"
+                    BackgroundColor="Transparent"
+                    TextColor="{AppThemeBinding Dark={StaticResource LabelTextDark}, Light={StaticResource LabelText}}"
+                    PlaceholderColor="{AppThemeBinding Dark={StaticResource ThirdLableTextDark}, Light={StaticResource ThirdLableText}}" />
+            </Border>
+
+            <Label Text="Fats (g)" Style="{StaticResource BaseLabelDefault}" />
+            <Border Style="{StaticResource InputBorderStyle}">
+                <Entry 
+                    Text="{Binding Food.Fats, Mode=TwoWay}" 
+                    Keyboard="Numeric"
+                    BackgroundColor="Transparent"
+                    TextColor="{AppThemeBinding Dark={StaticResource LabelTextDark}, Light={StaticResource LabelText}}"
+                    PlaceholderColor="{AppThemeBinding Dark={StaticResource ThirdLableTextDark}, Light={StaticResource ThirdLableText}}" />
+            </Border>
+
+            <Button 
+                Margin="10,10,10,0"
+                Text="{Binding ActionButtonText}" 
+                TextColor="{AppThemeBinding Dark={StaticResource LabelTextDark}, Light={StaticResource LabelText}}"
+                FontAttributes="Bold"
+                CornerRadius="8"
+                HeightRequest="50"
+                Command="{Binding SaveCommand}"
+                BackgroundColor="{DynamicResource Primary}" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

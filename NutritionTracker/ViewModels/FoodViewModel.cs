@@ -56,16 +56,15 @@ namespace NutritionTracker.ViewModels
         [RelayCommand]
         private async Task EditFoodAsync(Food food)
         {
-            var popup = new FoodPopup(
-                foodService: foodService,
-                food: food,
-                onSaved: () => MainThread.BeginInvokeOnMainThread(() =>
-                {
-                    GetFoodsCommand.Execute(null);
-                })
-            );
-
-            await Shell.Current.ShowPopupAsync(popup);
+            await Shell.Current.GoToAsync(nameof(FoodDetailPage), true, new Dictionary<string, object>
+            {
+                { "Food", food },
+                { "OnSaved", new Action(() => MainThread.BeginInvokeOnMainThread(() =>
+                    {
+                        GetFoodsCommand.Execute(null);
+                    }))
+                }
+            });
         }
 
         public void EnsureSorted()

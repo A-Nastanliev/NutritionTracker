@@ -118,10 +118,10 @@
 	  <MauiXaml Update="Resources\Styles\AccentColors\Turquoise.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="View\FoodPage.xaml">
+	  <MauiXaml Update="View\FoodDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="View\FoodPopup.xaml">
+	  <MauiXaml Update="View\FoodPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\HistoryPage.xaml">

@@ -13,15 +13,16 @@ public partial class FoodPage : ContentPage
 
     private async void OnAddFoodClicked(object sender, EventArgs e)
     {
-        var popup = new FoodPopup(
-            foodService: new FoodService(),
-            onSaved: () => MainThread.BeginInvokeOnMainThread(() =>
-            {
-                foodViewModel.GetFoodsCommand.Execute(null);
-            })
-        );
 
-        await this.ShowPopupAsync(popup);
+        await Shell.Current.GoToAsync(nameof(FoodDetailPage), true, new Dictionary<string, object>
+        {
+            { "Food", null },
+            { "OnSaved", new Action(() => MainThread.BeginInvokeOnMainThread(() =>
+                {
+                    foodViewModel.GetFoodsCommand.Execute(null);
+                }))
+            }
+        });
     }
 
     protected override void OnAppearing()

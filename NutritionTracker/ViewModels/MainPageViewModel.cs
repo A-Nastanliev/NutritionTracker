@@ -55,10 +55,10 @@ namespace NutritionTracker.ViewModels
             }
 
             TodayMealDay.Meals ??= new List<Meal>();
-            meals.Clear();
+            Meals.Clear();
             foreach (var meal in TodayMealDay.Meals)
             {
-                meals.Add(new MealViewModel(meal));
+                Meals.Add(new MealViewModel(meal));
             }
 
             UpdateSummary();
