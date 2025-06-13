@@ -26,7 +26,7 @@ This repository contains multiple projects to ensure a clean separation of conce
 
 1. Set the configuration to **Release** (not Debug)
 2. Right-click the `NutritionTracker` project in Visual Studio
-3. Select **Publish
+3. Select **Publish**
 4. Follow the prompts to generate and save your `.apk` file
 
 ---
@@ -58,7 +58,7 @@ The app is structured around **four main pages**, accessible via the bottom navi
 ### ⚙️ Settings
 
 - **Change Accent Color** (teal, mint, scarlet, coral, etc.)
-- **Sort Foods** (A–Z, Z–A, or by nutrient value — highest to lowest or lowest to highest)
+- **Sort Foods** (A–Z, Z–A, or by nutrient value — highest to lowest, or lowest to highest)
 - **Danger Zone Options**:
   - Delete entire database
   - Clear meal history (keep food DB)
