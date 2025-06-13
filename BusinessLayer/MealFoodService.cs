@@ -33,8 +33,10 @@ namespace BusinessLayer
         public async Task<MealFood> ReadAsync(int id)
         {
             var mealFood = await db.FindAsync<MealFood>(id);
-            Food food = await db.FindAsync<Food>(mealFood.FoodId);
-            if(food != null) mealFood.Food = food;
+            if (mealFood == null) return null;
+
+            mealFood.Food = await db.FindAsync<Food>(mealFood.FoodId);
+
             return mealFood;
         }
 

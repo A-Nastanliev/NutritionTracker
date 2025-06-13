@@ -32,6 +32,8 @@ namespace BusinessLayer
         public async Task<Meal> ReadAsync(int id)
         {
             var meal = await db.FindAsync<Meal>(id);
+            if (meal is null) return null;
+
             meal.MealFoods = await db.Table<MealFood>().Where(mf => mf.MealId == id).ToListAsync();
             return meal;
         }

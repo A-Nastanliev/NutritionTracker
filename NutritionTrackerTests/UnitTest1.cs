@@ -10,6 +10,7 @@ namespace NutritionTrackerTests
 		MealService mealService;
 		MealFoodService mealFoodService;
 		public int testFoodId;
+		public int testFood3Id;
 		public int testMealId;
 		public int testMealFoodId;
 		[SetUp]
@@ -52,7 +53,18 @@ namespace NutritionTrackerTests
 			};
 			await mealFoodService.CreateAsync(mealFood);
 			testMealFoodId = mealFood.Id;
-		}
+
+            Food food3 = new Food
+            {
+                Name = "aaa",
+                Calories = 200,
+                Proteins = 20,
+                Carbohydrates = 30,
+                Fats = 50,
+            };
+            await foodService.CreateAsync(food3);
+            testFoodId = food3.Id;
+        }
 
         [Test]
         public async Task Food_Create_Succ()
@@ -143,14 +155,14 @@ namespace NutritionTrackerTests
 			Assert.That(newMealFood, Is.Not.Null);
 		}
 
-		[Test]
-		public async Task MealFood_Read_UnSucc()
-		{
-			MealFood newMealFood = await mealFoodService.ReadAsync(int.MaxValue);
-			Assert.That(newMealFood, Is.Null);
-		}
+        [Test]
+        public async Task MealFood_Read_UnSucc()
+        {
+            MealFood newMealFood = await mealFoodService.ReadAsync(int.MaxValue);
+            Assert.That(newMealFood, Is.Null);
+        }
 
-		[Test]
+        [Test]
 		public async Task MealFood_Update_Succ()
 		{
 			MealFood newMealFood = await mealFoodService.ReadAsync(testMealFoodId);
@@ -167,14 +179,16 @@ namespace NutritionTrackerTests
 			MealFood mealFood1 = new MealFood
 			{
 				MealId = testMealId,
-				FoodId = testFoodId,
+				FoodId = testFood3Id,
 				Weight = 100
 			};
 			await mealFoodService.CreateAsync(mealFood1);
 			await mealFoodService.DeleteAsync(mealFood1.Id);
-			MealFood result = await mealFoodService.ReadAsync(mealFood1.Id);
-			Assert.That(result, Is.Null);
+            MealFood result = (await mealFoodService.ReadAllAsync())
+             .FirstOrDefault(m => m.Id == mealFood1.Id);
+            Assert.That(result, Is.Null);
 		}
+
 		[Test]
 		
 		public async Task Meal_Create_Succ()
@@ -196,14 +210,14 @@ namespace NutritionTrackerTests
 			Assert.That(newMeal, Is.Not.Null);
 		}
 
-		[Test]
-		public async Task Meal_Read_UnSucc()
-		{
-			Meal newMeal = await mealService.ReadAsync(int.MaxValue);
-			Assert.That(newMeal, Is.Null);
+        [Test]
+        public async Task Meal_Read_UnSucc()
+        {
+            Meal newMeal = await mealService.ReadAsync(int.MaxValue);
+            Assert.That(newMeal, Is.Null);
         }
 
-		[Test]
+        [Test]
 		public async Task Meal_Update_Succ()
 		{
 			Meal newMeal = await mealService.ReadAsync(testMealId);
@@ -224,8 +238,9 @@ namespace NutritionTrackerTests
 			};
 			await mealService.CreateAsync(meal);
 			await mealService.DeleteAsync(meal.Id);
-			Meal result = await mealService.ReadAsync(meal.Id);
-			Assert.That(result, Is.Null);
+            Meal result = (await mealService.ReadAllAsync())
+                     .FirstOrDefault(m => m.Id == meal.Id);
+            Assert.That(result, Is.Null);
 		}
 
         [OneTimeTearDown]
