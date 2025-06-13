@@ -43,7 +43,7 @@ namespace NutritionTracker.ViewModels
             if (mealViewModel is null)
                 return;
 
-            await Shell.Current.GoToAsync(nameof(MealDetailPage), new Dictionary<string, object>
+            await Shell.Current.GoToAsync(nameof(MealDetailPage),true,  new Dictionary<string, object>
             {
                 ["Meal"] = mealViewModel.Meal,
                  ["MealDate"] = _mealDay.Date
@@ -78,7 +78,7 @@ namespace NutritionTracker.ViewModels
             Meals.Add(new MealViewModel(newMeal));
             UpdateSummary();
 
-            await Shell.Current.GoToAsync(nameof(MealDetailPage),  new Dictionary<string, object>
+            await Shell.Current.GoToAsync(nameof(MealDetailPage),true,  new Dictionary<string, object>
             {
                 ["Meal"] = newMeal,
                 ["MealDate"] = _mealDay.Date

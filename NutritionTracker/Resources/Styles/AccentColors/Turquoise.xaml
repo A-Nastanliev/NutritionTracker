@@ -5,4 +5,7 @@
              x:Class="NutritionTracker.Resources.Styles.AccentColors.Turquoise">
     <Color x:Key="Primary">#40e0d0</Color>
     <Color x:Key="PrimaryDark">#2aa79b</Color>
+
+    <Color x:Key="Secondary">#7beedc</Color>
+    <Color x:Key="SecondaryDark">#238778</Color>
 </ResourceDictionary>

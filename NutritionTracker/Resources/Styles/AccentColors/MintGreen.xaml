@@ -5,4 +5,7 @@
              x:Class="NutritionTracker.Resources.Styles.AccentColors.MintGreen">
     <Color x:Key="Primary">#6cd78d</Color>
     <Color x:Key="PrimaryDark">#3fbf6b</Color>
+
+    <Color x:Key="Secondary">#a5edc2</Color>
+    <Color x:Key="SecondaryDark">#4cba7f</Color>
 </ResourceDictionary>

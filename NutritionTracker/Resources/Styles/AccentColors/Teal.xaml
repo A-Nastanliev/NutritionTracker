@@ -6,4 +6,7 @@
 
     <Color x:Key="Primary">#009688</Color>
     <Color x:Key="PrimaryDark">#00796b</Color>
+
+    <Color x:Key="Secondary">#33bfae</Color>
+    <Color x:Key="SecondaryDark">#006055</Color>
 </ResourceDictionary>

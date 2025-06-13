@@ -1,9 +1,25 @@
-﻿namespace NutritionTracker.ViewModels
+﻿using System.Diagnostics;
+using System.Net.Http;
+using System.Text.Json;
+
+namespace NutritionTracker.ViewModels
 {
+    [QueryProperty(nameof(ScannedBarcode), "ScannedBarcode")]
     public partial class FoodDetailViewModel : BaseViewModel
     {
         private readonly FoodService foodService;
         private readonly Action onSaved;
+
+        private string scannedBarcode;
+        public string ScannedBarcode
+        {
+            get => scannedBarcode;
+            set
+            {
+                SetProperty(ref scannedBarcode, value);
+                _ = ApplyBarcodeAsync(value);
+            }
+        }
 
         [ObservableProperty]
         private Food food;
@@ -40,7 +56,71 @@
 
             onSaved?.Invoke();
 
-            await Shell.Current.GoToAsync("..");
+            await Shell.Current.GoToAsync("..", true);
+
+        }
+
+        [RelayCommand]
+        private async Task ScanBarcodeAsync()
+        {
+            await Shell.Current.GoToAsync(nameof(BarcodeScannerPage), true);
+        }
+
+        private async Task ApplyBarcodeAsync(string code)
+        {
+            if (string.IsNullOrWhiteSpace(code)) return;
+
+            if (Connectivity.Current.NetworkAccess != NetworkAccess.Internet)
+            {
+                await Shell.Current.DisplayAlert("No Internet",
+                    "An internet connection is required to look up nutrition info.", "OK");
+                return;
+            }
+
+            try
+            {
+                var url = $"https://world.openfoodfacts.org/api/v0/product/{code}.json";
+
+                using var client = new HttpClient { Timeout = TimeSpan.FromSeconds(10) };
+                using var response = await client.GetAsync(url);
+
+                if (!response.IsSuccessStatusCode)
+                    throw new HttpRequestException($"HTTP {response.StatusCode}");
+
+                var json = await response.Content.ReadAsStringAsync();
+
+                using var doc = JsonDocument.Parse(json);
+                var root = doc.RootElement;
+
+                if (root.TryGetProperty("status", out var statusEl) && statusEl.GetInt32() == 1 &&
+                    root.TryGetProperty("product", out var product))
+                {
+                    var nutriments = product.GetProperty("nutriments");
+
+                    string name = product.GetProperty("product_name").GetString() ?? code;
+                    double? kcal = nutriments.TryGetProperty("energy-kcal_100g", out var c) ? c.GetDouble() : null;
+                    double? proteins = nutriments.TryGetProperty("proteins_100g", out var p) ? p.GetDouble() : null;
+                    double? carbs = nutriments.TryGetProperty("carbohydrates_100g", out var cb) ? cb.GetDouble() : null;
+                    double? fat = nutriments.TryGetProperty("fat_100g", out var f) ? f.GetDouble() : null;
+
+                    Food.Name = name;
+                    Food.Calories = kcal != null ? (int?)Math.Round(kcal.Value) : null;
+                    Food.Proteins = proteins != null ? (int?)Math.Round(proteins.Value) : null;
+                    Food.Carbohydrates = carbs != null ? (int?)Math.Round(carbs.Value) : null;
+                    Food.Fats = fat != null ? (int?)Math.Round(fat.Value) : null;
+
+                    OnPropertyChanged(nameof(Food));
+                    return;  
+                }
+
+                await Shell.Current.DisplayAlert("Not Found",
+                    "Sorry, that barcode isn't in the database yet.", "OK");
+            }
+            catch (Exception ex)
+            {
+                await Shell.Current.DisplayAlert("Lookup Failed",
+                    $"Unable to retrieve nutrition data: {ex.Message}", "OK");
+            }
 
         }
     }

@@ -1,9 +1,11 @@
 namespace NutritionTracker.View;
 
+
 public partial class FoodPage : ContentPage
 {
     FoodViewModel foodViewModel;
 
+  
     public FoodPage()
     {
         InitializeComponent();

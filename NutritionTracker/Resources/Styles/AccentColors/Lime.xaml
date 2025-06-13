@@ -5,4 +5,7 @@
              x:Class="NutritionTracker.Resources.Styles.AccentColors.Lime">
     <Color x:Key="Primary">#cddc39</Color>
     <Color x:Key="PrimaryDark">#a4b42c</Color>
+
+    <Color x:Key="Secondary">#e6ee9c</Color>
+    <Color x:Key="SecondaryDark">#97a32e</Color>
 </ResourceDictionary>

@@ -15,7 +15,8 @@ namespace NutritionTracker
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-                });
+                })
+                .UseBarcodeReader();
 
             builder.Services.AddSingleton<DatabaseService>();
             builder.Services.AddSingleton<FoodService>();
@@ -26,6 +27,7 @@ namespace NutritionTracker
             builder.Services.AddTransient<FoodDetailPage>();
             builder.Services.AddTransient<MealDetailPage>();
             builder.Services.AddTransient<MealDayPage>();
+            builder.Services.AddTransient<BarcodeScannerPage>();
 
             builder.Services.AddSingleton<FoodPage>();
             builder.Services.AddSingleton<MainPage>();

@@ -93,12 +93,13 @@
             </CollectionView>
         </RefreshView>
 
-        <Button Text="Add Food"
-        Grid.Row="1"
-        Margin="0,10,0,0"
-        FontAttributes="Bold"
-        CornerRadius="10"
-        Clicked="OnAddFoodClicked"
-        Style="{StaticResource Button}"/>
+        <Button 
+            Text="Add Food"
+            Grid.Row="1"
+            Margin="0,10,0,0"
+            FontAttributes="Bold"
+            CornerRadius="10"
+            Clicked="OnAddFoodClicked"
+            Style="{StaticResource Button}"/>
     </Grid>
 </ContentPage>

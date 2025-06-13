@@ -4,4 +4,7 @@
              x:Class="NutritionTracker.Resources.Styles.AccentColors.Indigo">
     <Color x:Key="Primary">#4b0082</Color>
     <Color x:Key="PrimaryDark">#320055</Color>
+
+    <Color x:Key="Secondary">#9575cd</Color>
+    <Color x:Key="SecondaryDark">#5e2e91</Color>
 </ResourceDictionary>

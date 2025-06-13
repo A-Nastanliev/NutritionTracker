@@ -2,6 +2,7 @@ namespace NutritionTracker.View;
 
 public partial class FoodDetailPage : ContentPage, IQueryAttributable
 {
+ 
     public FoodDetailPage()
     {
         InitializeComponent();
@@ -9,9 +10,16 @@ public partial class FoodDetailPage : ContentPage, IQueryAttributable
 
     public void ApplyQueryAttributes(IDictionary<string, object> query)
     {
-        var food = query.ContainsKey("Food") ? query["Food"] as Food : null;
-        var onSaved = query.ContainsKey("OnSaved") ? query["OnSaved"] as Action : null;
+        if (BindingContext is not FoodDetailViewModel vm)
+        {
+            var food = query.TryGetValue("Food", out var f) ? f as Food : null;
+            var onSaved = query.TryGetValue("OnSaved", out var a) ? a as Action : null;
 
-        BindingContext = new FoodDetailViewModel(new FoodService(), onSaved, food);
+            vm = new FoodDetailViewModel(new FoodService(), onSaved, food);
+            BindingContext = vm;
+        }
+
+        if (query.TryGetValue("ScannedBarcode", out var b) && b is string code)
+            ((FoodDetailViewModel)BindingContext).ScannedBarcode = code;
     }
 }

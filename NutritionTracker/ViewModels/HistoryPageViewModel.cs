@@ -77,7 +77,7 @@ namespace NutritionTracker.ViewModels
             if (vm == null)
                 return;
 
-           await Shell.Current.GoToAsync(nameof(MealDayPage), new Dictionary<string, object>
+           await Shell.Current.GoToAsync(nameof(MealDayPage),true, new Dictionary<string, object>
             {
                 ["MealDay"] = vm.MealDay
             });

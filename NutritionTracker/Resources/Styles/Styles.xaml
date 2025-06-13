@@ -10,7 +10,7 @@
             <Setter Property="StrokeThickness" Value="1" />
             <Setter Property="StrokeShape">
                 <Setter.Value>
-                    <RoundRectangle CornerRadius="8" />
+                    <RoundRectangle CornerRadius="10" />
                 </Setter.Value>
             </Setter>
             <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource Gray900}, Light={StaticResource Gray100}}" />

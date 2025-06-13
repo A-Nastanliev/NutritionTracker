@@ -5,4 +5,7 @@
              x:Class="NutritionTracker.Resources.Styles.AccentColors.Crimson">
     <Color x:Key="Primary">#dc143c</Color>
     <Color x:Key="PrimaryDark">#a10e2b</Color>
+
+    <Color x:Key="Secondary">#f06273</Color>
+    <Color x:Key="SecondaryDark">#82192a</Color>
 </ResourceDictionary>

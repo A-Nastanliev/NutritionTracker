@@ -4,4 +4,7 @@
              x:Class="NutritionTracker.Resources.Styles.AccentColors.SkyBlue">
     <Color x:Key="Primary">#87ceeb</Color>
     <Color x:Key="PrimaryDark">#5aa9c7</Color>
+
+    <Color x:Key="Secondary">#aedff7</Color>
+    <Color x:Key="SecondaryDark">#478aa4</Color>
 </ResourceDictionary>
