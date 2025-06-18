@@ -104,10 +104,10 @@ namespace NutritionTracker.ViewModels
                     double? fat = nutriments.TryGetProperty("fat_100g", out var f) ? f.GetDouble() : null;
 
                     Food.Name = name;
-                    Food.Calories = kcal != null ? (int?)Math.Round(kcal.Value) : null;
-                    Food.Proteins = proteins != null ? (int?)Math.Round(proteins.Value) : null;
-                    Food.Carbohydrates = carbs != null ? (int?)Math.Round(carbs.Value) : null;
-                    Food.Fats = fat != null ? (int?)Math.Round(fat.Value) : null;
+                    Food.Calories = kcal;
+                    Food.Proteins = proteins;
+                    Food.Carbohydrates = carbs;
+                    Food.Fats = fat;
 
                     OnPropertyChanged(nameof(Food));
                     return;  
