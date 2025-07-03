@@ -21,7 +21,9 @@ namespace NutritionTracker.ViewModels
         private string foodWeightInGrams;
 
         public string MealCalories => $"{Meal.GetCalories():F0} kcal";
-        public string MealMacros => $"Protein: {Meal.GetProteins():F0}g, Carbs: {Meal.GetCarbohydrates():F0}g, Fats: {Meal.GetFats():F0}g";
+        public string MealProteins => $"Protein: {Meal.GetProteins():F0}g";
+        public string MealCarbs => $"Carbs: {Meal.GetCarbohydrates():F0}g";
+        public string MealFats => $"Fats: {Meal.GetFats():F0}g";
 
         public MealDetailViewModel(Meal meal, DateTime date)
         {
@@ -69,7 +71,9 @@ namespace NutritionTracker.ViewModels
             MealFoods.Add(new MealFoodViewModel(mealFood, ConfirmRemoveMealFoodAsync));
 
             OnPropertyChanged(nameof(MealCalories));
-            OnPropertyChanged(nameof(MealMacros));
+            OnPropertyChanged(nameof(MealProteins));
+            OnPropertyChanged(nameof(MealFats));
+            OnPropertyChanged(nameof(MealCarbs));
             FoodWeightInGrams = string.Empty;
         }
 
@@ -87,7 +91,9 @@ namespace NutritionTracker.ViewModels
             MealFoods.Remove(vm);
             await _mealFoodService.DeleteAsync(vm.MealFood.Id);
             OnPropertyChanged(nameof(MealCalories));
-            OnPropertyChanged(nameof(MealMacros));
+            OnPropertyChanged(nameof(MealProteins));
+            OnPropertyChanged(nameof(MealFats));
+            OnPropertyChanged(nameof(MealCarbs));
         }
 
 

@@ -25,8 +25,13 @@
                         </VerticalStackLayout>
                     </CollectionView.EmptyView>
 
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Vertical" Span="2" />
+                    </CollectionView.ItemsLayout>
+
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
+
                             <SwipeView>
                                 <SwipeView.RightItems>
                                     <SwipeItems Mode="Execute">
@@ -37,45 +42,96 @@
                                     </SwipeItems>
                                 </SwipeView.RightItems>
 
-                                <Border x:Name="MealCard"
-                                        StrokeThickness="1"
-                                        StrokeShape="RoundRectangle 10"
-                                        Margin="0,8"
-                                        Padding="10"
-                                        BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource OffBlack}}"
-                                        Stroke="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray600}}">
+                                <Border 
+                                    StrokeThickness="1"
+                                    StrokeShape="RoundRectangle 18"
+                                    Margin="10,8,10,8"
+                                    Padding="12"
+                                    BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource OffBlack}}"
+                                    Stroke="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray600}}"
+                                    HorizontalOptions="Fill">
 
                                     <Border.GestureRecognizers>
                                         <TapGestureRecognizer 
-                                            Tapped="OnMealDayCardTapped"
-                                            CommandParameter="{Binding .}" />
+                                        Tapped="OnMealDayCardTapped"
+                                        CommandParameter="{Binding .}" />
                                     </Border.GestureRecognizers>
 
-                                    <VerticalStackLayout Spacing="8">
-                                        <Grid ColumnDefinitions="*,Auto">
-                                            <Label Text="{Binding DateText}"
-                                                 FontSize="18"
-                                                 FontAttributes="Bold"
-                                                 TextColor="{AppThemeBinding Light={StaticResource LabelText}, Dark={StaticResource LabelTextDark}}" />
+                                    <VerticalStackLayout 
+                                        Spacing="6" 
+                                        HorizontalOptions="Center" 
+                                        VerticalOptions="Center">
+                                        
+                                        <Label Text="{Binding DateText}"
+                                           FontSize="17"
+                                           FontAttributes="Bold"
+                                           HorizontalTextAlignment="Center"
+                                           TextColor="{AppThemeBinding Light={StaticResource LabelText}, Dark={StaticResource LabelTextDark}}" />
 
-                                            <Label Text="{Binding CaloriesText}"
-                                                 FontSize="16"
-                                                 FontAttributes="Bold"
-                                                 Grid.Column="1"
-                                                 HorizontalOptions="End"
-                                                 TextColor="{AppThemeBinding Light={StaticResource LabelText}, Dark={StaticResource LabelTextDark}}" />
-                                        </Grid>
+                                        <Label Text="{Binding CaloriesText}"
+                                           FontSize="15"
+                                           HorizontalTextAlignment="Center"
+                                           TextColor="{AppThemeBinding Light={StaticResource LabelText}, Dark={StaticResource LabelTextDark}}" />
 
-                                        <Grid ColumnDefinitions="*,Auto">
-                                            <Label Text="{Binding MacrosText}"
-                                                 FontSize="13"
-                                                 TextColor="{AppThemeBinding Light={StaticResource SecondaryLabelText}, Dark={StaticResource SecondaryLabelTextDark}}" />
+                                        <Label Text="{Binding MealCountText}"
+                                           FontSize="13"
+                                           HorizontalTextAlignment="Center"
+                                           TextColor="{AppThemeBinding Light={StaticResource SecondaryLabelText}, Dark={StaticResource SecondaryLabelTextDark}}" />
 
-                                            <Label Text="{Binding MealCountText}"
-                                                 FontSize="13"
-                                                 Grid.Column="1"
-                                                 HorizontalOptions="End"
-                                                 TextColor="{AppThemeBinding Light={StaticResource SecondaryLabelText}, Dark={StaticResource SecondaryLabelTextDark}}" />
+                                        <Grid
+                                          RowDefinitions="*,*"
+                                          ColumnDefinitions="*,*,*"
+                                          HorizontalOptions="Center"
+                                          ColumnSpacing="6">
+
+                                            <Label 
+                                                Text="P:"
+                                                FontSize="11"
+                                                HorizontalOptions="Center"
+                                                TextColor="{AppThemeBinding Light={StaticResource SecondaryLabelText}, Dark={StaticResource SecondaryLabelTextDark}}"
+                                                Grid.Column="0"
+                                                Grid.Row="0"/>
+
+                                            <Label 
+                                                Text="C:"
+                                                FontSize="11"
+                                                HorizontalOptions="Center"
+                                                TextColor="{AppThemeBinding Light={StaticResource SecondaryLabelText}, Dark={StaticResource SecondaryLabelTextDark}}"
+                                                Grid.Column="1"
+                                                Grid.Row="0"/>
+
+                                            <Label 
+                                                Text="F:"
+                                                FontSize="11"
+                                                HorizontalOptions="Center"
+                                                TextColor="{AppThemeBinding Light={StaticResource SecondaryLabelText}, Dark={StaticResource SecondaryLabelTextDark}}"
+                                                Grid.Column="2"
+                                                Grid.Row="0"/>
+
+                                            <Label 
+                                                Text="{Binding ProteinText}"
+                                                FontSize="11"
+                                                HorizontalOptions="Center"
+                                                TextColor="{AppThemeBinding Light={StaticResource SecondaryLabelText}, Dark={StaticResource SecondaryLabelTextDark}}"
+                                                Grid.Row="1"
+                                                Grid.Column="0" />
+
+                                            <Label 
+                                                Text="{Binding CarbsText}"
+                                                FontSize="11"
+                                                HorizontalOptions="Center"
+                                                TextColor="{AppThemeBinding Light={StaticResource SecondaryLabelText}, Dark={StaticResource SecondaryLabelTextDark}}"
+                                                Grid.Row="1"
+                                                Grid.Column="1" />
+
+                                            <Label 
+                                                Text="{Binding FatText}"
+                                                FontSize="11"
+                                                HorizontalOptions="Center"
+                                                TextColor="{AppThemeBinding Light={StaticResource SecondaryLabelText}, Dark={StaticResource SecondaryLabelTextDark}}"
+                                                Grid.Row="1"
+                                                Grid.Column="2" />
+
                                         </Grid>
                                     </VerticalStackLayout>
                                 </Border>

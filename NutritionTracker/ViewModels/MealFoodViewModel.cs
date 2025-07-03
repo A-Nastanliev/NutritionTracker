@@ -6,8 +6,10 @@
         public string Name => MealFood.Food?.Name ?? "Unknown";
 
         public string WeightText => $"{MealFood.Weight}g";
-        public string CaloriesText => $"Calories: {MealFood.GetCalories():F0} kcal";
-        public string MacrosText => $"Protein: {MealFood.GetProteins():F0}g, Carbs: {MealFood.GetCarbohydrates():F0}g, Fats: {MealFood.GetFats():F0}g";
+        public string CaloriesText => $"{MealFood.GetCalories():F0} kcal";
+        public string ProteinText => $"Proteins: {MealFood.GetProteins():F0}g";
+        public string CarbText => $"Carbs: {MealFood.GetCarbohydrates():F0}g";
+        public string FatText => $"Fats: {MealFood.GetFats():F0}g";
 
         private readonly Func<MealFoodViewModel, Task> _onRemoveAsync;
 

@@ -9,12 +9,11 @@
             MealDay = mealDay;
         }
 
-        public string DateText => MealDay.Date.ToString("MMMM dd, yyyy");
-
-        public string CaloriesText => $"Total Calories: {MealDay.GetCalories():F0} kcal";
-
-        public string MacrosText =>
-            $"P: {MealDay.GetProteins():F0}g, C: {MealDay.GetCarbohydrates():F0}g, F: {MealDay.GetFats():F0}g";
+        public string DateText => MealDay.Date.ToString("dd/MM/yy");
+        public string CaloriesText => $"{MealDay.GetCalories():F0} kcal";
+        public string ProteinText => $"{MealDay.GetProteins():F0}g";
+        public string CarbsText => $"{MealDay.GetCarbohydrates():F0}g";
+        public string FatText => $"{MealDay.GetFats():F0}g";
 
         public string MealCountText => $"Meals: {MealDay.Meals?.Count ?? 0}";
 
